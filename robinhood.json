@@ -27,8 +27,16 @@
       "description": "Quote"
     },
     {
+      "name": "dividends",
+      "description": "Dividends"
+    },
+    {
       "name": "markets",
       "description": "Markets"
+    },
+    {
+      "name": "movers",
+      "description": "Movers"
     },
     {
       "name": "watchlists",
@@ -72,7 +80,144 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«Accounts»"
+              "$ref": "#/definitions/Multiple«AccountInfo»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/portfolio/": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "getPortFolio",
+        "operationId": "getPortFolioUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "accountId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Portfolio"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/positions/": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "getAllPositions",
+        "operationId": "getAllPositionsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nonzero",
+            "in": "query",
+            "description": "nonzero",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Multiple«Position»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/positions/{positionId}/": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "getPosition",
+        "operationId": "getPositionUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "positionId",
+            "in": "path",
+            "description": "positionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Position"
             }
           },
           "401": {
@@ -173,6 +318,44 @@
           },
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dividends/{id}/": {
+      "get": {
+        "tags": [
+          "dividends"
+        ],
+        "summary": "getDividend",
+        "operationId": "getDividendUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
@@ -489,6 +672,47 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MarketHours"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/midlands/movers/sp500/": {
+      "get": {
+        "tags": [
+          "movers"
+        ],
+        "summary": "getMovers",
+        "operationId": "getMoversUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "direction",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Multiple«Movers»"
             }
           },
           "401": {
@@ -1196,11 +1420,91 @@
     }
   },
   "definitions": {
-    "Accounts": {
+    "AccountInfo": {
       "type": "object",
       "properties": {
-        "all": {
-          "$ref": "#/definitions/Multiple«Accounts»"
+        "account_number": {
+          "type": "string"
+        },
+        "buying_power": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_available_for_withdrawal": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_balances": {
+          "$ref": "#/definitions/CashBalances"
+        },
+        "cash_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deactivated": {
+          "type": "boolean"
+        },
+        "deposit_halted": {
+          "type": "boolean"
+        },
+        "margin_balances": {
+          "$ref": "#/definitions/MarginBalances"
+        },
+        "max_ach_early_access_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "only_position_closing_trades": {
+          "type": "boolean"
+        },
+        "portfolio": {
+          "type": "string"
+        },
+        "positions": {
+          "type": "string"
+        },
+        "sma": {
+          "type": "number",
+          "format": "double"
+        },
+        "sma_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "sweep_enabled": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uncleared_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "unsettled_funds": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "withdrawal_halted": {
+          "type": "boolean"
         }
       }
     },
@@ -1261,6 +1565,43 @@
         },
         "zipcode": {
           "type": "string"
+        }
+      }
+    },
+    "CashBalances": {
+      "type": "object",
+      "properties": {
+        "buying_power": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_available_for_withdrawal": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "uncleared_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "unsettled_funds": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1473,6 +1814,75 @@
         }
       }
     },
+    "MarginBalances": {
+      "type": "object",
+      "properties": {
+        "cash": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_available_for_withdrawal": {
+          "type": "number",
+          "format": "double"
+        },
+        "cash_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "day_trade_buying_power": {
+          "type": "number",
+          "format": "double"
+        },
+        "day_trade_buying_power_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "day_trade_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "margin_limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "marked_pattern_day_trader_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "overnight_buying_power": {
+          "type": "number",
+          "format": "double"
+        },
+        "overnight_buying_power_held_for_orders": {
+          "type": "number",
+          "format": "double"
+        },
+        "overnight_ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "unallocated_margin_cash": {
+          "type": "number",
+          "format": "double"
+        },
+        "uncleared_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "unsettled_funds": {
+          "type": "number",
+          "format": "double"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "MarketData": {
       "type": "object",
       "properties": {
@@ -1542,32 +1952,239 @@
         }
       }
     },
-    "Multiple«Accounts»": {
+    "Movers": {
       "type": "object"
+    },
+    "Multiple«AccountInfo»": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountInfo"
+          }
+        }
+      }
     },
     "Multiple«FundamentalsData»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FundamentalsData"
+          }
+        }
+      }
     },
     "Multiple«InstrumentData»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstrumentData"
+          }
+        }
+      }
     },
     "Multiple«InstrumentSplit»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstrumentSplit"
+          }
+        }
+      }
     },
     "Multiple«MarketData»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketData"
+          }
+        }
+      }
+    },
+    "Multiple«Movers»": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Movers"
+          }
+        }
+      }
     },
     "Multiple«OrderResponse»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderResponse"
+          }
+        }
+      }
+    },
+    "Multiple«Position»": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Position"
+          }
+        }
+      }
     },
     "Multiple«QuoteData»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuoteData"
+          }
+        }
+      }
     },
     "Multiple«WatchListCreateResponse»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WatchListCreateResponse"
+          }
+        }
+      }
     },
     "Multiple«WatchListsData»": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WatchListsData"
+          }
+        }
+      }
     },
     "OrderResponse": {
       "type": "object",
@@ -1657,6 +2274,130 @@
         },
         "type": {
           "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Portfolio": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "adjusted_equity_previous_close": {
+          "type": "number",
+          "format": "double"
+        },
+        "equity": {
+          "type": "number",
+          "format": "double"
+        },
+        "equity_previous_close": {
+          "type": "number",
+          "format": "double"
+        },
+        "excess_maintenance": {
+          "type": "number",
+          "format": "double"
+        },
+        "excess_maintenance_with_uncleared_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "excess_margin": {
+          "type": "number",
+          "format": "double"
+        },
+        "excess_margin_with_uncleared_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "extended_hours_equity": {
+          "type": "number",
+          "format": "double"
+        },
+        "extended_hours_market_value": {
+          "type": "number",
+          "format": "double"
+        },
+        "last_core_equity": {
+          "type": "number",
+          "format": "double"
+        },
+        "last_core_market_value": {
+          "type": "number",
+          "format": "double"
+        },
+        "market_value": {
+          "type": "number",
+          "format": "double"
+        },
+        "start_date": {
+          "type": "string"
+        },
+        "unwithdrawable_deposits": {
+          "type": "number",
+          "format": "double"
+        },
+        "unwithdrawable_grants": {
+          "type": "number",
+          "format": "double"
+        },
+        "url": {
+          "type": "string"
+        },
+        "withdrawable_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "average_buy_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "instrument": {
+          "type": "string"
+        },
+        "intraday_average_buy_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "intraday_quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "shares_held_for_buys": {
+          "type": "number",
+          "format": "double"
+        },
+        "shares_held_for_sells": {
+          "type": "number",
+          "format": "double"
+        },
+        "shares_held_for_stock_grants": {
+          "type": "number",
+          "format": "double"
         },
         "updated_at": {
           "type": "string",
