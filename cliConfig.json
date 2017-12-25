@@ -1,0 +1,7 @@
+{
+  "groupId": "com.kalki",
+  "artifactId": "robinhood",
+  "artifactVersion": "0.0.1",
+  "library": "feign",
+  "dateLibrary": "java8"
+}
