@@ -1,17 +1,16 @@
 package com.kalki.robinhood.api;
 
 import com.kalki.robinhood.models.AuthResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class Authentication {
 
-    @PostMapping("/api-token-auth/")
-    public AuthResponse login(String username, String password) {
+    @PostMapping(value = "/api-token-auth/", consumes = "application/x-www-form-urlencoded")
+    public AuthResponse login(@RequestPart String username,
+                              @RequestPart String password,
+                              @RequestPart(required = false) String mfa_code) {
         return new AuthResponse();
     }
 

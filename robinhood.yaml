@@ -1,0 +1,1205 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: api.robinhood.com
+basePath: /
+tags:
+  - name: accounts
+    description: Accounts
+  - name: authentication
+    description: Authentication
+  - name: quote
+    description: Quote
+  - name: markets
+    description: Markets
+  - name: watchlists
+    description: Watchlists
+  - name: fundamentals
+    description: Fundamentals
+  - name: order
+    description: Order
+  - name: instruments
+    description: Instruments
+  - name: user
+    description: User
+schemes:
+  - https
+paths:
+  /accounts/:
+    get:
+      tags:
+        - accounts
+      summary: getAll
+      operationId: getAllUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«Accounts»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api-token-auth/:
+    post:
+      tags:
+        - authentication
+      summary: login
+      operationId: loginUsingPOST
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - '*/*'
+      parameters:
+        - name: username
+          in: formData
+          description: username
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: password
+          required: true
+          type: string
+        - name: mfa_code
+          in: formData
+          description: mfa_code
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AuthResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api-token-logout/:
+    post:
+      tags:
+        - authentication
+      summary: logout
+      operationId: logoutUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /fundamentals/:
+    get:
+      tags:
+        - fundamentals
+      summary: query
+      operationId: queryUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbols
+          in: query
+          description: symbols
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«FundamentalsData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/fundamentals/{symbol}/':
+    get:
+      tags:
+        - fundamentals
+      summary: getFundamentals
+      operationId: getFundamentalsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbol
+          in: path
+          description: symbol
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FundamentalsData'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /instruments:
+    get:
+      tags:
+        - instruments
+      summary: getAll
+      operationId: getAllUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«InstrumentData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /instruments/:
+    get:
+      tags:
+        - instruments
+      summary: query
+      operationId: queryUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: query
+          in: query
+          description: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«InstrumentData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/instruments/{instrument_id}/':
+    get:
+      tags:
+        - instruments
+      summary: get
+      operationId: getUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: instrument_id
+          in: path
+          description: instrument_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InstrumentData'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/instruments/{instrument_id}/splits/':
+    get:
+      tags:
+        - instruments
+      summary: getSplits
+      operationId: getSplitsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: instrument_id
+          in: path
+          description: instrument_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«InstrumentSplit»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /markets:
+    get:
+      tags:
+        - markets
+      summary: getAll
+      operationId: getAllUsingGET_2
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«MarketData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/markets/{mic}/hours/{date}/':
+    get:
+      tags:
+        - markets
+      summary: getMArketHours
+      operationId: getMArketHoursUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: mic
+          in: path
+          description: mic
+          required: true
+          type: string
+        - name: date
+          in: path
+          description: date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MarketHours'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /orders/:
+    get:
+      tags:
+        - order
+      summary: getAll
+      operationId: getAllUsingGET_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: updated_at
+          in: query
+          description: updated_at
+          required: false
+          type: string
+          format: date-time
+        - name: instrument
+          in: query
+          description: instrument
+          required: false
+          type: string
+        - name: cursonr
+          in: query
+          description: cursonr
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«OrderResponse»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - order
+      summary: placeOrder
+      operationId: placeOrderUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: account
+          in: query
+          required: false
+          type: string
+        - name: instrument
+          in: query
+          required: false
+          type: string
+        - name: symbol
+          in: query
+          required: false
+          type: string
+        - name: type
+          in: query
+          required: false
+          type: string
+        - name: time_in_force
+          in: query
+          required: false
+          type: string
+        - name: trigger
+          in: query
+          required: false
+          type: string
+        - name: price
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: stop_price
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: quantity
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: side
+          in: query
+          required: false
+          type: string
+        - name: client_id
+          in: query
+          required: false
+          type: string
+        - name: extended_hours
+          in: query
+          required: false
+          type: boolean
+        - name: override_day_trade_checks
+          in: query
+          required: false
+          type: boolean
+        - name: override_dtbp_checks
+          in: query
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/orders/{order_id}/':
+    get:
+      tags:
+        - order
+      summary: getOrder
+      operationId: getOrderUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: order_id
+          in: path
+          description: order_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/orders/{order_id}/cancel/':
+    post:
+      tags:
+        - order
+      summary: cancel
+      operationId: cancelUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: order_id
+          in: path
+          description: order_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /quotes/:
+    get:
+      tags:
+        - quote
+      summary: getQuotes
+      operationId: getQuotesUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbols
+          in: query
+          description: symbols
+          required: false
+          type: string
+          default: 'TSLA,AMD'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«QuoteData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/quotes/{symbol}/':
+    get:
+      tags:
+        - quote
+      summary: getQuote
+      operationId: getQuoteUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbol
+          in: path
+          description: symbol
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QuoteData'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /user/:
+    get:
+      tags:
+        - user
+      summary: getUser
+      operationId: getUserUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /user/basic_info/:
+    get:
+      tags:
+        - user
+      summary: getBasicInfo
+      operationId: getBasicInfoUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BasicInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /user/id/:
+    get:
+      tags:
+        - user
+      summary: getUserId
+      operationId: getUserIdUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserId'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /user/investment_profile/:
+    get:
+      tags:
+        - user
+      summary: getInvestmentProfile
+      operationId: getInvestmentProfileUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InvestmentProfile'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /watchlists/:
+    get:
+      tags:
+        - watchlists
+      summary: getAll
+      operationId: getAllUsingGET_4
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«WatchListCreateResponse»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - watchlists
+      summary: create
+      operationId: createUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: name
+          in: query
+          description: name
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WatchListCreateResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /watchlists/Default/bulk_add/:
+    post:
+      tags:
+        - watchlists
+      summary: add
+      operationId: addUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbols
+          in: query
+          description: symbols
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WatchListsData'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/watchlists/{name}/':
+    get:
+      tags:
+        - watchlists
+      summary: get
+      operationId: getUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: name
+          in: path
+          description: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«WatchListsData»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/watchlists/{name}/{instrumentId}':
+    delete:
+      tags:
+        - watchlists
+      summary: delete
+      operationId: deleteUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: name
+          in: path
+          description: name
+          required: true
+          type: string
+        - name: instrumentId
+          in: path
+          description: instrumentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Multiple«WatchListsData»'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+securityDefinitions:
+  Token:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Accounts:
+    type: object
+    properties:
+      all:
+        $ref: '#/definitions/Multiple«Accounts»'
+  AuthResponse:
+    type: object
+    properties:
+      mfa_required:
+        type: string
+      mfa_type:
+        type: string
+      token:
+        type: string
+  BasicInfo:
+    type: object
+    properties:
+      address:
+        type: string
+      citizenship:
+        type: string
+      city:
+        type: string
+      country_of_residence:
+        type: string
+      date_of_birth:
+        type: string
+      marital_status:
+        type: string
+      number_dependents:
+        type: integer
+        format: int32
+      phone_number:
+        type: string
+      state:
+        type: string
+      tax_id_ssn:
+        type: string
+      updated_at:
+        type: string
+        format: date-time
+      user:
+        type: string
+      zipcode:
+        type: string
+  Execution:
+    type: object
+    properties:
+      id:
+        type: string
+      price:
+        type: number
+        format: double
+      quantity:
+        type: number
+        format: double
+      settlement_date:
+        type: string
+        format: date
+      timestamp:
+        type: string
+        format: date-time
+  FundamentalsData:
+    type: object
+    properties:
+      average_volume:
+        type: number
+        format: double
+      description:
+        type: string
+      dividend_yield:
+        type: number
+        format: double
+      high:
+        type: number
+        format: double
+      high_52_weeks:
+        type: number
+        format: double
+      instrument:
+        type: string
+      low:
+        type: number
+        format: double
+      low_52_weeks:
+        type: number
+        format: double
+      market_cap:
+        type: number
+        format: double
+      open:
+        type: number
+        format: double
+      pe_ratio:
+        type: number
+        format: double
+      volume:
+        type: number
+        format: double
+  InstrumentData:
+    type: object
+    properties:
+      bloomberg_unique:
+        type: string
+      country:
+        type: string
+      day_trade_ratio:
+        type: number
+        format: double
+      fundamentals:
+        type: string
+      id:
+        type: string
+      list_date:
+        type: string
+      maintenance_ratio:
+        type: number
+        format: double
+      margin_initial_ratio:
+        type: number
+        format: double
+      market:
+        type: string
+      min_tick_size:
+        type: number
+        format: double
+      name:
+        type: string
+      quote:
+        type: string
+      simple_name:
+        type: string
+      splits:
+        type: string
+      state:
+        type: string
+      symbol:
+        type: string
+      tradability:
+        type: string
+      tradeable:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+  InstrumentSplit:
+    type: object
+    properties:
+      divisor:
+        type: string
+      execution_date:
+        type: string
+      instrument:
+        type: string
+      multiplier:
+        type: string
+      url:
+        type: string
+  InvestmentProfile:
+    type: object
+    properties:
+      annual_income:
+        type: string
+      investment_experience:
+        type: string
+      investment_objective:
+        type: string
+      liquid_net_worth:
+        type: string
+      liquidity_needs:
+        type: string
+      risk_tolerance:
+        type: string
+      source_of_funds:
+        type: string
+      suitability_verified:
+        type: boolean
+      tax_bracket:
+        type: string
+      time_horizon:
+        type: string
+      total_net_worth:
+        type: string
+      updated_at:
+        type: string
+        format: date-time
+      user:
+        type: string
+  MarketData:
+    type: object
+    properties:
+      acronym:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      mic:
+        type: string
+      name:
+        type: string
+      operating_mic:
+        type: string
+      timezone:
+        type: string
+      todays_hours:
+        type: string
+      url:
+        type: string
+      website:
+        type: string
+  MarketHours:
+    type: object
+    properties:
+      closes_at:
+        type: string
+        format: date-time
+      date:
+        type: string
+        format: date-time
+      extended_closes_at:
+        type: string
+        format: date-time
+      extended_opens_at:
+        type: string
+        format: date-time
+      is_open:
+        type: boolean
+      next_open_hours:
+        type: string
+      opens_at:
+        type: string
+        format: date-time
+      previous_open_hours:
+        type: string
+  Multiple«Accounts»:
+    type: object
+  Multiple«FundamentalsData»:
+    type: object
+  Multiple«InstrumentData»:
+    type: object
+  Multiple«InstrumentSplit»:
+    type: object
+  Multiple«MarketData»:
+    type: object
+  Multiple«OrderResponse»:
+    type: object
+  Multiple«QuoteData»:
+    type: object
+  Multiple«WatchListCreateResponse»:
+    type: object
+  Multiple«WatchListsData»:
+    type: object
+  OrderResponse:
+    type: object
+    properties:
+      account:
+        type: string
+      average_price:
+        type: number
+        format: double
+      cancel:
+        type: string
+      client_id:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      cumulative_quantity:
+        type: number
+        format: double
+      executions:
+        type: array
+        items:
+          $ref: '#/definitions/Execution'
+      extended_hours:
+        type: boolean
+      fees:
+        type: number
+        format: double
+      id:
+        type: string
+      instrument:
+        type: string
+      last_transaction_at:
+        type: string
+        format: date-time
+      override_day_trade_checks:
+        type: boolean
+      override_dtbp_checks:
+        type: boolean
+      position:
+        type: string
+      price:
+        type: number
+        format: double
+      quantity:
+        type: integer
+        format: int32
+      reject_reason:
+        type: string
+      side:
+        type: string
+      state:
+        type: string
+      stop_price:
+        type: number
+        format: double
+      symbol:
+        type: string
+      time_in_force:
+        type: string
+      trigger:
+        type: string
+      type:
+        type: string
+      updated_at:
+        type: string
+        format: date-time
+      url:
+        type: string
+  QuoteData:
+    type: object
+    properties:
+      adjusted_previous_close:
+        type: number
+        format: double
+      ask_price:
+        type: number
+        format: double
+      ask_size:
+        type: integer
+        format: int32
+      bid_price:
+        type: number
+        format: double
+      bid_size:
+        type: integer
+        format: int32
+      last_extended_hours_trade_price:
+        type: number
+        format: double
+      last_trade_price:
+        type: number
+        format: double
+      previous_close:
+        type: number
+        format: double
+      previous_close_date:
+        type: string
+        format: date
+      symbol:
+        type: string
+      trading_halted:
+        type: boolean
+      updated_at:
+        type: string
+        format: date-time
+  UserId:
+    type: object
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+      username:
+        type: string
+  UserInfo:
+    type: object
+    properties:
+      additional_info:
+        type: string
+      basic_info:
+        type: string
+      email:
+        type: string
+      employment:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      id_info:
+        type: string
+      international_info:
+        type: string
+      investment_profile:
+        type: string
+      last_name:
+        type: string
+      url:
+        type: string
+      username:
+        type: string
+  WatchListCreateResponse:
+    type: object
+    properties:
+      name:
+        type: string
+      url:
+        type: string
+      user:
+        type: string
+  WatchListsData:
+    type: object
+    properties:
+      created_at:
+        type: string
+      instrument:
+        type: string
+      url:
+        type: string
+      watchlist:
+        type: string

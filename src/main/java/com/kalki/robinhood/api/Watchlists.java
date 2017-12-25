@@ -1,10 +1,9 @@
 package com.kalki.robinhood.api;
 
+import com.kalki.robinhood.models.Multiple;
 import com.kalki.robinhood.models.WatchListCreateResponse;
 import com.kalki.robinhood.models.WatchListsData;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/watchlists")
 public class Watchlists {
-    @PostMapping()
+
+    @GetMapping("/")
+    public Multiple<WatchListCreateResponse> getAll() {
+        return new Multiple<>();
+    }
+
+    @GetMapping("/{name}/")
+    public Multiple<WatchListsData> get(
+            @PathVariable("name") String name) {
+        return new Multiple<>();
+    }
+
+    @DeleteMapping("/{name}/{instrumentId}")
+    public Multiple<WatchListsData> delete(@PathVariable("name") String name,
+                                           @PathVariable("instrumentId") String instrumentId) {
+        return new Multiple<>();
+    }
+
+
+    @PostMapping("/")
     public WatchListCreateResponse create(String name) {
         return new WatchListCreateResponse();
     }

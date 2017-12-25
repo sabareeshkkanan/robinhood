@@ -1,6 +1,7 @@
 package com.kalki.robinhood.models;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class OrderResponse extends OrderRequest {
     private String position;
@@ -21,9 +22,7 @@ public class OrderResponse extends OrderRequest {
     private ZonedDateTime created_at;
 
 
-    private boolean extended_hours;
-
-    private String[] executions;
+    private List<Execution> executions;
 
 
     private Double cumulative_quantity;
@@ -31,7 +30,7 @@ public class OrderResponse extends OrderRequest {
     private Double fees;
 
 
-    private boolean override_dtbp_checks;
+
 
     private String reject_reason;
 
@@ -40,7 +39,7 @@ public class OrderResponse extends OrderRequest {
     private Double average_price;
 
     private ZonedDateTime updated_at;
-    private String client_id;
+
 
     public String getPosition() {
         return position;
@@ -100,23 +99,7 @@ public class OrderResponse extends OrderRequest {
         this.created_at = created_at;
     }
 
-    @Override
-    public boolean isExtended_hours() {
-        return extended_hours;
-    }
 
-    @Override
-    public void setExtended_hours(boolean extended_hours) {
-        this.extended_hours = extended_hours;
-    }
-
-    public String[] getExecutions() {
-        return executions;
-    }
-
-    public void setExecutions(String[] executions) {
-        this.executions = executions;
-    }
 
     public Double getCumulative_quantity() {
         return cumulative_quantity;
@@ -134,15 +117,7 @@ public class OrderResponse extends OrderRequest {
         this.fees = fees;
     }
 
-    @Override
-    public boolean isOverride_dtbp_checks() {
-        return override_dtbp_checks;
-    }
 
-    @Override
-    public void setOverride_dtbp_checks(boolean override_dtbp_checks) {
-        this.override_dtbp_checks = override_dtbp_checks;
-    }
 
     public String getReject_reason() {
         return reject_reason;
@@ -176,13 +151,12 @@ public class OrderResponse extends OrderRequest {
         this.updated_at = updated_at;
     }
 
-    @Override
-    public String getClient_id() {
-        return client_id;
+
+    public List<Execution> getExecutions() {
+        return executions;
     }
 
-    @Override
-    public void setClient_id(String client_id) {
-        this.client_id = client_id;
+    public void setExecutions(List<Execution> executions) {
+        this.executions = executions;
     }
 }

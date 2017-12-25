@@ -50,6 +50,6 @@ public class SwaggerConfig {
 
     @Bean
     public ApiKey oauth() {
-        return new ApiKey("jwt", "Authorization", "header");
+        return new ApiKey("Token", "Authorization", "header");
     }
 }

@@ -18,7 +18,7 @@ public class Instruments {
     }
 
 
-    @GetMapping("/{instrument_id}")
+    @GetMapping("/{instrument_id}/")
     public InstrumentData get(@PathVariable("instrument_id") String instrument_id) {
         return new InstrumentData();
     }
