@@ -25,7 +25,8 @@ https://generator.swagger.io/api/gen/clients/{language}
 	    "artifactVersion":"0.0.1",
 	    "library":"feign",
 	    "dateLibrary":"java8"
-    },	    "swaggerUrl":"https://github.com/sabareeshkkanan/robinhood/releases/download/0.1/robinhood.json"
+    },	   
+    "swaggerUrl":"https://github.com/sabareeshkkanan/robinhood/releases/download/0.1/robinhood.json"
     }
 
 And i got a one time url back to download the generated client
