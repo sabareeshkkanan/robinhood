@@ -3,6 +3,7 @@ package com.kalki.robinhood.models;
 import java.util.List;
 
 public class Multiple<T> {
+    private Integer count;
     private String next;
     private List<T> results;
     private String previous;
@@ -29,5 +30,13 @@ public class Multiple<T> {
 
     public void setPrevious(String previous) {
         this.previous = previous;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
