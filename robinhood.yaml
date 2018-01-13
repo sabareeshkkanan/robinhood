@@ -50,7 +50,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«AccountInfo»'
+            $ref: '#/definitions/MultipleAccountInfo'
         '401':
           description: Unauthorized
         '403':
@@ -109,7 +109,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«Position»'
+            $ref: '#/definitions/MultiplePosition'
         '401':
           description: Unauthorized
         '403':
@@ -259,7 +259,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«FundamentalsData»'
+            $ref: '#/definitions/MultipleFundamentalsData'
         '401':
           description: Unauthorized
         '403':
@@ -307,7 +307,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentData»'
+            $ref: '#/definitions/MultipleInstrumentData'
         '401':
           description: Unauthorized
         '403':
@@ -334,7 +334,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentData»'
+            $ref: '#/definitions/MultipleInstrumentData'
         '401':
           description: Unauthorized
         '403':
@@ -388,7 +388,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentSplit»'
+            $ref: '#/definitions/MultipleInstrumentSplit'
         '401':
           description: Unauthorized
         '403':
@@ -409,7 +409,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«MarketData»'
+            $ref: '#/definitions/MultipleMarketData'
         '401':
           description: Unauthorized
         '403':
@@ -468,7 +468,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«Movers»'
+            $ref: '#/definitions/MultipleMovers'
         '401':
           description: Unauthorized
         '403':
@@ -506,7 +506,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«OrderResponse»'
+            $ref: '#/definitions/MultipleOrderResponse'
         '401':
           description: Unauthorized
         '403':
@@ -672,7 +672,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«QuoteData»'
+            $ref: '#/definitions/MultipleQuoteData'
         '401':
           description: Unauthorized
         '403':
@@ -804,7 +804,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListCreateResponse»'
+            $ref: '#/definitions/MultipleWatchListCreateResponse'
         '401':
           description: Unauthorized
         '403':
@@ -890,7 +890,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListsData»'
+            $ref: '#/definitions/MultipleWatchListsData'
         '401':
           description: Unauthorized
         '403':
@@ -922,7 +922,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListsData»'
+            $ref: '#/definitions/MultipleWatchListsData'
         '204':
           description: No Content
         '401':
@@ -1308,7 +1308,7 @@ definitions:
         type: string
   Movers:
     type: object
-  Multiple«AccountInfo»:
+  MultipleAccountInfo:
     type: object
     properties:
       count:
@@ -1322,7 +1322,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AccountInfo'
-  Multiple«FundamentalsData»:
+  MultipleFundamentalsData:
     type: object
     properties:
       count:
@@ -1336,7 +1336,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/FundamentalsData'
-  Multiple«InstrumentData»:
+  MultipleInstrumentData:
     type: object
     properties:
       count:
@@ -1350,7 +1350,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InstrumentData'
-  Multiple«InstrumentSplit»:
+  MultipleInstrumentSplit:
     type: object
     properties:
       count:
@@ -1364,7 +1364,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InstrumentSplit'
-  Multiple«MarketData»:
+  MultipleMarketData:
     type: object
     properties:
       count:
@@ -1378,7 +1378,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/MarketData'
-  Multiple«Movers»:
+  MultipleMovers:
     type: object
     properties:
       count:
@@ -1392,7 +1392,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Movers'
-  Multiple«OrderResponse»:
+  MultipleOrderResponse:
     type: object
     properties:
       count:
@@ -1406,7 +1406,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/OrderResponse'
-  Multiple«Position»:
+  MultiplePosition:
     type: object
     properties:
       count:
@@ -1420,7 +1420,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Position'
-  Multiple«QuoteData»:
+  MultipleQuoteData:
     type: object
     properties:
       count:
@@ -1434,7 +1434,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/QuoteData'
-  Multiple«WatchListCreateResponse»:
+  MultipleWatchListCreateResponse:
     type: object
     properties:
       count:
@@ -1448,7 +1448,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/WatchListCreateResponse'
-  Multiple«WatchListsData»:
+  MultipleWatchListsData:
     type: object
     properties:
       count:
