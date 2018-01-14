@@ -40,8 +40,8 @@ paths:
     get:
       tags:
         - accounts
-      summary: getAll
-      operationId: getAllUsingGET
+      summary: get accounts information
+      operationId: accounts
       consumes:
         - application/json
       produces:
@@ -61,8 +61,8 @@ paths:
     get:
       tags:
         - accounts
-      summary: getPortFolio
-      operationId: getPortFolioUsingGET
+      summary: get portfolio details
+      operationId: portfolio
       consumes:
         - application/json
       produces:
@@ -89,7 +89,7 @@ paths:
       tags:
         - accounts
       summary: getAllPositions
-      operationId: getAllPositionsUsingGET
+      operationId: positions
       consumes:
         - application/json
       produces:
@@ -121,7 +121,7 @@ paths:
       tags:
         - accounts
       summary: getPosition
-      operationId: getPositionUsingGET
+      operationId: position
       consumes:
         - application/json
       produces:
@@ -153,7 +153,7 @@ paths:
       tags:
         - authentication
       summary: login
-      operationId: loginUsingPOST
+      operationId: login
       consumes:
         - application/x-www-form-urlencoded
       produces:
@@ -192,7 +192,7 @@ paths:
       tags:
         - authentication
       summary: logout
-      operationId: logoutUsingPOST
+      operationId: logout
       consumes:
         - application/json
       produces:
@@ -219,7 +219,7 @@ paths:
       tags:
         - dividends
       summary: getDividend
-      operationId: getDividendUsingGET
+      operationId: dividend
       consumes:
         - application/json
       produces:
@@ -243,8 +243,8 @@ paths:
     get:
       tags:
         - fundamentals
-      summary: query
-      operationId: queryUsingGET
+      summary: query fundamentals
+      operationId: fundamentals
       consumes:
         - application/json
       produces:
@@ -271,7 +271,7 @@ paths:
       tags:
         - fundamentals
       summary: getFundamentals
-      operationId: getFundamentalsUsingGET
+      operationId: fundamental
       consumes:
         - application/json
       produces:
@@ -293,33 +293,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  /instruments:
-    get:
-      tags:
-        - instruments
-      summary: getAll
-      operationId: getAllUsingGET_1
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/MultipleInstrumentData'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
   /instruments/:
     get:
       tags:
         - instruments
       summary: query
-      operationId: queryUsingGET_1
+      operationId: instruments
       consumes:
         - application/json
       produces:
@@ -329,6 +308,11 @@ paths:
           in: query
           description: query
           required: false
+          type: string
+        - name: symbol
+          in: query
+          description: symbol
+          required: False
           type: string
       responses:
         '200':
@@ -346,7 +330,7 @@ paths:
       tags:
         - instruments
       summary: get
-      operationId: getUsingGET
+      operationId: instrument
       consumes:
         - application/json
       produces:
@@ -373,7 +357,7 @@ paths:
       tags:
         - instruments
       summary: getSplits
-      operationId: getSplitsUsingGET
+      operationId: instrument_splits
       consumes:
         - application/json
       produces:
@@ -399,8 +383,8 @@ paths:
     get:
       tags:
         - markets
-      summary: getAll
-      operationId: getAllUsingGET_2
+      summary: get all markets
+      operationId: markets
       consumes:
         - application/json
       produces:
@@ -421,7 +405,7 @@ paths:
       tags:
         - markets
       summary: getMArketHours
-      operationId: getMArketHoursUsingGET
+      operationId: market_hours
       consumes:
         - application/json
       produces:
@@ -453,7 +437,7 @@ paths:
       tags:
         - movers
       summary: getMovers
-      operationId: getMoversUsingGET
+      operationId: movers_sp500
       consumes:
         - application/json
       produces:
@@ -461,9 +445,10 @@ paths:
       parameters:
         - name: direction
           in: query
-          description: direction
+          description: direction (up|down)
           required: false
           type: string
+          enum: [up, down]
       responses:
         '200':
           description: OK
@@ -480,7 +465,7 @@ paths:
       tags:
         - order
       summary: getAll
-      operationId: getAllUsingGET_3
+      operationId: orders
       consumes:
         - application/json
       produces:
@@ -516,8 +501,8 @@ paths:
     post:
       tags:
         - order
-      summary: placeOrder
-      operationId: placeOrderUsingPOST
+      summary: place an order
+      operationId: order_place
       consumes:
         - application/json
       produces:
@@ -600,7 +585,7 @@ paths:
       tags:
         - order
       summary: getOrder
-      operationId: getOrderUsingGET
+      operationId: order
       consumes:
         - application/json
       produces:
@@ -627,7 +612,7 @@ paths:
       tags:
         - order
       summary: cancel
-      operationId: cancelUsingPOST
+      operationId: order_cancel
       consumes:
         - application/json
       produces:
@@ -656,7 +641,7 @@ paths:
       tags:
         - quote
       summary: getQuotes
-      operationId: getQuotesUsingGET
+      operationId: quotes
       consumes:
         - application/json
       produces:
@@ -684,7 +669,7 @@ paths:
       tags:
         - quote
       summary: getQuote
-      operationId: getQuoteUsingGET
+      operationId: quote
       consumes:
         - application/json
       produces:
@@ -706,12 +691,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+# XXX Can also be done through query, multiple at a time up to 75?
   '/quotes/historicals/{symbol}/':
     get:
       tags:
         - quote
       summary: getHistoricalQuote
-      operationId: getHistoricalQuote
+      operationId: quote_historicals
       consumes:
         - application/json
       produces:
@@ -727,16 +713,19 @@ paths:
           description: interval (week|day|10minute|5minute|None(all))
           required: true
           type: string
+          enum: [week, day, 10minute, 5minute, 1minute] # XXX is 1minute valid??
         - name: span
           in: query
           description: span (day|week|year|5year|all)
           required: false
           type: string
+          enum: [day, week, year, 5year, all]
         - name: bounds
           in: query
           description: bounds (extended|regular|trading)
           required: false
           type: string
+          enum: [extended, regular, trading]  # XXX validate
       responses:
         '200':
           description: OK
@@ -753,7 +742,7 @@ paths:
       tags:
         - user
       summary: getUser
-      operationId: getUserUsingGET
+      operationId: user
       consumes:
         - application/json
       produces:
@@ -774,7 +763,7 @@ paths:
       tags:
         - user
       summary: getBasicInfo
-      operationId: getBasicInfoUsingGET
+      operationId: user_basic_info
       consumes:
         - application/json
       produces:
@@ -795,7 +784,7 @@ paths:
       tags:
         - user
       summary: getUserId
-      operationId: getUserIdUsingGET
+      operationId: user_id
       consumes:
         - application/json
       produces:
@@ -816,7 +805,7 @@ paths:
       tags:
         - user
       summary: getInvestmentProfile
-      operationId: getInvestmentProfileUsingGET
+      operationId: investment_profile
       consumes:
         - application/json
       produces:
@@ -837,7 +826,7 @@ paths:
       tags:
         - watchlists
       summary: getAll
-      operationId: getAllUsingGET_4
+      operationId: watchlists
       consumes:
         - application/json
       produces:
@@ -857,7 +846,7 @@ paths:
       tags:
         - watchlists
       summary: create
-      operationId: createUsingPOST
+      operationId: watchlist_create
       consumes:
         - application/json
       produces:
@@ -886,7 +875,7 @@ paths:
       tags:
         - watchlists
       summary: add
-      operationId: addUsingPOST
+      operationId: watchlist_add
       consumes:
         - application/json
       produces:
@@ -917,7 +906,7 @@ paths:
       tags:
         - watchlists
       summary: get
-      operationId: getUsingGET_1
+      operationId: watchlist
       consumes:
         - application/json
       produces:
@@ -944,7 +933,7 @@ paths:
       tags:
         - watchlists
       summary: delete
-      operationId: deleteUsingDELETE
+      operationId: watchlist_delete
       consumes:
         - application/json
       produces:
