@@ -836,14 +836,14 @@
             "in": "query",
             "required": false,
             "type": "number",
-            "format": "double"
+            "format": "decimal"
           },
           {
             "name": "stop_price",
             "in": "query",
             "required": false,
             "type": "number",
-            "format": "double"
+            "format": "decimal"
           },
           {
             "name": "quantity",
@@ -1428,22 +1428,22 @@
         },
         "buying_power": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_available_for_withdrawal": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_balances": {
           "$ref": "#/definitions/CashBalances"
         },
         "cash_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "created_at": {
           "type": "string",
@@ -1460,7 +1460,7 @@
         },
         "max_ach_early_access_amount": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "only_position_closing_trades": {
           "type": "boolean"
@@ -1473,11 +1473,11 @@
         },
         "sma": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "sma_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "sweep_enabled": {
           "type": "boolean"
@@ -1487,11 +1487,11 @@
         },
         "uncleared_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "unsettled_funds": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "updated_at": {
           "type": "string",
@@ -1573,19 +1573,19 @@
       "properties": {
         "buying_power": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_available_for_withdrawal": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "created_at": {
           "type": "string",
@@ -1593,11 +1593,11 @@
         },
         "uncleared_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "unsettled_funds": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "updated_at": {
           "type": "string",
@@ -1613,11 +1613,11 @@
         },
         "price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "quantity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "settlement_date": {
           "type": "string",
@@ -1634,49 +1634,49 @@
       "properties": {
         "average_volume": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "description": {
           "type": "string"
         },
         "dividend_yield": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "high": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "high_52_weeks": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "instrument": {
           "type": "string"
         },
         "low": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "low_52_weeks": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "market_cap": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "open": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "pe_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "volume": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         }
       }
     },
@@ -1691,7 +1691,7 @@
         },
         "day_trade_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "fundamentals": {
           "type": "string"
@@ -1704,18 +1704,18 @@
         },
         "maintenance_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "margin_initial_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "market": {
           "type": "string"
         },
         "min_tick_size": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "name": {
           "type": "string"
@@ -1819,15 +1819,15 @@
       "properties": {
         "cash": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_available_for_withdrawal": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cash_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "created_at": {
           "type": "string",
@@ -1835,19 +1835,19 @@
         },
         "day_trade_buying_power": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "day_trade_buying_power_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "day_trade_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "margin_limit": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "marked_pattern_day_trader_date": {
           "type": "string",
@@ -1855,27 +1855,27 @@
         },
         "overnight_buying_power": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "overnight_buying_power_held_for_orders": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "overnight_ratio": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "unallocated_margin_cash": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "uncleared_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "unsettled_funds": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "updated_at": {
           "type": "string",
@@ -2194,7 +2194,7 @@
         },
         "average_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "cancel": {
           "type": "string"
@@ -2208,7 +2208,7 @@
         },
         "cumulative_quantity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "executions": {
           "type": "array",
@@ -2221,7 +2221,7 @@
         },
         "fees": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "id": {
           "type": "string"
@@ -2244,7 +2244,7 @@
         },
         "price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "quantity": {
           "type": "integer",
@@ -2261,7 +2261,7 @@
         },
         "stop_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "symbol": {
           "type": "string"
@@ -2292,69 +2292,69 @@
         },
         "adjusted_equity_previous_close": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "equity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "equity_previous_close": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "excess_maintenance": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "excess_maintenance_with_uncleared_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "excess_margin": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "excess_margin_with_uncleared_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "extended_hours_equity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "extended_hours_market_value": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "last_core_equity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "last_core_market_value": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "market_value": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "start_date": {
           "type": "string"
         },
         "unwithdrawable_deposits": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "unwithdrawable_grants": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "url": {
           "type": "string"
         },
         "withdrawable_amount": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         }
       }
     },
@@ -2366,7 +2366,7 @@
         },
         "average_buy_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "created_at": {
           "type": "string",
@@ -2377,27 +2377,27 @@
         },
         "intraday_average_buy_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "intraday_quantity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "quantity": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "shares_held_for_buys": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "shares_held_for_sells": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "shares_held_for_stock_grants": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "updated_at": {
           "type": "string",
@@ -2413,11 +2413,11 @@
       "properties": {
         "adjusted_previous_close": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "ask_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "ask_size": {
           "type": "integer",
@@ -2425,7 +2425,7 @@
         },
         "bid_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "bid_size": {
           "type": "integer",
@@ -2433,15 +2433,15 @@
         },
         "last_extended_hours_trade_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "last_trade_price": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "previous_close": {
           "type": "number",
-          "format": "double"
+          "format": "decimal"
         },
         "previous_close_date": {
           "type": "string",
