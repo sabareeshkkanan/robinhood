@@ -706,6 +706,48 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+  '/quotes/historicals/{symbol}/':
+    get:
+      tags:
+        - quote
+      summary: getHistoricalQuote
+      operationId: getHistoricalQuote
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: symbol
+          in: path
+          description: symbol
+          required: true
+          type: string
+        - name: interval
+          in: query
+          description: interval (week|day|10minute|5minute|None(all))
+          required: true
+          type: string
+        - name: span
+          in: query
+          description: span (day|week|year|5year|all)
+          required: false
+          type: string
+        - name: bounds
+          in: query
+          description: bounds (extended|regular|trading)
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HistoricalQuoteData'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   /user/:
     get:
       tags:
@@ -1657,6 +1699,62 @@ definitions:
       updated_at:
         type: string
         format: date-time
+  MultipleHistoricalData:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+      next:
+        type: string
+      previous:
+        type: string
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/HistoricalQuoteData'
+  HistoricalQuoteData:
+    type: object
+    properties:
+      quote:
+        type: string
+      symbol:
+        type: string
+      interval:
+        type: string
+      bounds:
+        type: string
+      instrument:
+        type: string
+      historicals:
+        type: array
+        items:
+          $ref: '#/definitions/HistoryData'
+  HistoryData:
+    type: object
+    properties:
+      begins_at:
+        type: string
+        format: date-time
+      open_price:
+        type: number
+        format: decimal
+      close_price:
+        type: number
+        format: decimal
+      high_price:
+        type: number
+        format: decimal
+      low_price:
+        type: number
+        format: decimal
+      volume:
+        type: integer
+        format: int32
+      session:
+        type: string
+      interpolated:
+        type: boolean
   UserId:
     type: object
     properties:
