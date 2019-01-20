@@ -159,20 +159,17 @@ paths:
           name: mfa_code
           description: mfa_code
           required: false
-          schema:
-            type: string
+          type: string
         - in: formData
           name: password
           description: password
           required: true
-          schema:
-            type: string
+          type: string
         - in: formData
           name: username
           description: username
           required: true
-          schema:
-            type: string
+          type: string
       responses:
         '200':
           description: OK
