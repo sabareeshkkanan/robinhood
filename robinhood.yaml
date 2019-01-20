@@ -15,24 +15,24 @@ tags:
     description: Accounts
   - name: authentication
     description: Authentication
-  - name: quote
-    description: Quote
   - name: dividends
     description: Dividends
+  - name: fundamentals
+    description: Fundamentals
+  - name: instruments
+    description: Instruments
   - name: markets
     description: Markets
   - name: movers
     description: Movers
-  - name: watchlists
-    description: Watchlists
-  - name: fundamentals
-    description: Fundamentals
   - name: order
     description: Order
-  - name: instruments
-    description: Instruments
+  - name: quote
+    description: Quote
   - name: user
     description: User
+  - name: watchlists
+    description: Watchlists
 schemes:
   - https
 paths:
@@ -42,29 +42,26 @@ paths:
         - accounts
       summary: getAll
       operationId: getAllUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«AccountInfo»'
+            $ref: '#/definitions/MultipleOfAccountInfo'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/accounts/{accountId}/portfolio/':
     get:
       tags:
         - accounts
       summary: getPortFolio
       operationId: getPortFolioUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -84,14 +81,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/accounts/{accountId}/positions/':
     get:
       tags:
         - accounts
       summary: getAllPositions
       operationId: getAllPositionsUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -109,21 +105,20 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«Position»'
+            $ref: '#/definitions/MultipleOfPosition'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/accounts/{accountId}/positions/{positionId}/':
     get:
       tags:
         - accounts
       summary: getPosition
       operationId: getPositionUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -148,6 +143,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /api-token-auth/:
     post:
       tags:
@@ -159,21 +155,24 @@ paths:
       produces:
         - '*/*'
       parameters:
-        - name: username
-          in: formData
-          description: username
-          required: true
-          type: string
-        - name: password
-          in: formData
-          description: password
-          required: true
-          type: string
-        - name: mfa_code
-          in: formData
+        - in: formData
+          name: mfa_code
           description: mfa_code
           required: false
-          type: string
+          schema:
+            type: string
+        - in: formData
+          name: password
+          description: password
+          required: true
+          schema:
+            type: string
+        - in: formData
+          name: username
+          description: username
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -187,6 +186,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /api-token-logout/:
     post:
       tags:
@@ -214,14 +214,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/dividends/{id}/':
     get:
       tags:
         - dividends
       summary: getDividend
       operationId: getDividendUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -239,14 +238,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /fundamentals/:
     get:
       tags:
         - fundamentals
       summary: query
       operationId: queryUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -259,21 +257,20 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«FundamentalsData»'
+            $ref: '#/definitions/MultipleOfFundamentalsData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/fundamentals/{symbol}/':
     get:
       tags:
         - fundamentals
       summary: getFundamentals
       operationId: getFundamentalsUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -293,35 +290,33 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /instruments:
     get:
       tags:
         - instruments
       summary: getAll
       operationId: getAllUsingGET_1
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentData»'
+            $ref: '#/definitions/MultipleOfInstrumentData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /instruments/:
     get:
       tags:
         - instruments
       summary: query
       operationId: queryUsingGET_1
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -334,21 +329,20 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentData»'
+            $ref: '#/definitions/MultipleOfInstrumentData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/instruments/{instrument_id}/':
     get:
       tags:
         - instruments
       summary: get
       operationId: getUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -368,14 +362,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/instruments/{instrument_id}/splits/':
     get:
       tags:
         - instruments
       summary: getSplits
       operationId: getSplitsUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -388,53 +381,51 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«InstrumentSplit»'
+            $ref: '#/definitions/MultipleOfInstrumentSplit'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /markets:
     get:
       tags:
         - markets
       summary: getAll
       operationId: getAllUsingGET_2
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«MarketData»'
+            $ref: '#/definitions/MultipleOfMarketData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/markets/{mic}/hours/{date}/':
     get:
       tags:
         - markets
       summary: getMArketHours
       operationId: getMArketHoursUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
-        - name: mic
-          in: path
-          description: mic
-          required: true
-          type: string
         - name: date
           in: path
           description: date
+          required: true
+          type: string
+        - name: mic
+          in: path
+          description: mic
           required: true
           type: string
       responses:
@@ -448,14 +439,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /midlands/movers/sp500/:
     get:
       tags:
         - movers
       summary: getMovers
       operationId: getMoversUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -468,51 +458,51 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«Movers»'
+            $ref: '#/definitions/MultipleOfMovers'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /orders/:
     get:
       tags:
         - order
       summary: getAll
       operationId: getAllUsingGET_3
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
+        - name: cursonr
+          in: query
+          description: cursonr
+          required: false
+          type: string
+        - name: instrument
+          in: query
+          description: instrument
+          required: false
+          type: string
         - name: updated_at
           in: query
           description: updated_at
           required: false
           type: string
           format: date-time
-        - name: instrument
-          in: query
-          description: instrument
-          required: false
-          type: string
-        - name: cursonr
-          in: query
-          description: cursonr
-          required: false
-          type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«OrderResponse»'
+            $ref: '#/definitions/MultipleOfOrderResponse'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
     post:
       tags:
         - order
@@ -527,32 +517,27 @@ paths:
           in: query
           required: false
           type: string
+        - name: client_id
+          in: query
+          required: false
+          type: string
+        - name: extended_hours
+          in: query
+          required: false
+          type: boolean
         - name: instrument
           in: query
           required: false
           type: string
-        - name: symbol
+        - name: override_day_trade_checks
           in: query
           required: false
-          type: string
-        - name: type
+          type: boolean
+        - name: override_dtbp_checks
           in: query
           required: false
-          type: string
-        - name: time_in_force
-          in: query
-          required: false
-          type: string
-        - name: trigger
-          in: query
-          required: false
-          type: string
+          type: boolean
         - name: price
-          in: query
-          required: false
-          type: number
-          format: double
-        - name: stop_price
           in: query
           required: false
           type: number
@@ -566,22 +551,27 @@ paths:
           in: query
           required: false
           type: string
-        - name: client_id
+        - name: stop_price
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: symbol
           in: query
           required: false
           type: string
-        - name: extended_hours
+        - name: time_in_force
           in: query
           required: false
-          type: boolean
-        - name: override_day_trade_checks
+          type: string
+        - name: trigger
           in: query
           required: false
-          type: boolean
-        - name: override_dtbp_checks
+          type: string
+        - name: type
           in: query
           required: false
-          type: boolean
+          type: string
       responses:
         '200':
           description: OK
@@ -595,14 +585,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/orders/{order_id}/':
     get:
       tags:
         - order
       summary: getOrder
       operationId: getOrderUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -622,6 +611,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/orders/{order_id}/cancel/':
     post:
       tags:
@@ -651,14 +641,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /quotes/:
     get:
       tags:
         - quote
       summary: getQuotes
       operationId: getQuotesUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -672,21 +661,20 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«QuoteData»'
+            $ref: '#/definitions/MultipleOfQuoteData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/quotes/{symbol}/':
     get:
       tags:
         - quote
       summary: getQuote
       operationId: getQuoteUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -706,14 +694,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /user/:
     get:
       tags:
         - user
       summary: getUser
       operationId: getUserUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
@@ -727,14 +714,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /user/basic_info/:
     get:
       tags:
         - user
       summary: getBasicInfo
       operationId: getBasicInfoUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
@@ -748,14 +734,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /user/id/:
     get:
       tags:
         - user
       summary: getUserId
       operationId: getUserIdUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
@@ -769,14 +754,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /user/investment_profile/:
     get:
       tags:
         - user
       summary: getInvestmentProfile
       operationId: getInvestmentProfileUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
@@ -790,27 +774,27 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /watchlists/:
     get:
       tags:
         - watchlists
       summary: getAll
       operationId: getAllUsingGET_4
-      consumes:
-        - application/json
       produces:
         - '*/*'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListCreateResponse»'
+            $ref: '#/definitions/MultipleOfWatchListCreateResponse'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
     post:
       tags:
         - watchlists
@@ -839,6 +823,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   /watchlists/Default/bulk_add/:
     post:
       tags:
@@ -870,14 +855,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/watchlists/{name}/':
     get:
       tags:
         - watchlists
       summary: get
       operationId: getUsingGET_1
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
@@ -890,45 +874,45 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListsData»'
+            $ref: '#/definitions/MultipleOfWatchListsData'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
+      deprecated: false
   '/watchlists/{name}/{instrumentId}':
     delete:
       tags:
         - watchlists
       summary: delete
       operationId: deleteUsingDELETE
-      consumes:
-        - application/json
       produces:
         - '*/*'
       parameters:
-        - name: name
-          in: path
-          description: name
-          required: true
-          type: string
         - name: instrumentId
           in: path
           description: instrumentId
+          required: true
+          type: string
+        - name: name
+          in: path
+          description: name
           required: true
           type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Multiple«WatchListsData»'
+            $ref: '#/definitions/MultipleOfWatchListsData'
         '204':
           description: No Content
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
+      deprecated: false
 securityDefinitions:
   Token:
     type: apiKey
@@ -997,6 +981,7 @@ definitions:
         type: string
       withdrawal_halted:
         type: boolean
+    title: AccountInfo
   AuthResponse:
     type: object
     properties:
@@ -1006,6 +991,7 @@ definitions:
         type: string
       token:
         type: string
+    title: AuthResponse
   BasicInfo:
     type: object
     properties:
@@ -1037,6 +1023,7 @@ definitions:
         type: string
       zipcode:
         type: string
+    title: BasicInfo
   CashBalances:
     type: object
     properties:
@@ -1064,6 +1051,7 @@ definitions:
       updated_at:
         type: string
         format: date-time
+    title: CashBalances
   Execution:
     type: object
     properties:
@@ -1081,6 +1069,7 @@ definitions:
       timestamp:
         type: string
         format: date-time
+    title: Execution
   FundamentalsData:
     type: object
     properties:
@@ -1118,6 +1107,7 @@ definitions:
       volume:
         type: number
         format: double
+    title: FundamentalsData
   InstrumentData:
     type: object
     properties:
@@ -1165,6 +1155,7 @@ definitions:
         type: string
       url:
         type: string
+    title: InstrumentData
   InstrumentSplit:
     type: object
     properties:
@@ -1178,6 +1169,7 @@ definitions:
         type: string
       url:
         type: string
+    title: InstrumentSplit
   InvestmentProfile:
     type: object
     properties:
@@ -1208,6 +1200,7 @@ definitions:
         format: date-time
       user:
         type: string
+    title: InvestmentProfile
   MarginBalances:
     type: object
     properties:
@@ -1259,6 +1252,7 @@ definitions:
       updated_at:
         type: string
         format: date-time
+    title: MarginBalances
   MarketData:
     type: object
     properties:
@@ -1282,6 +1276,7 @@ definitions:
         type: string
       website:
         type: string
+    title: MarketData
   MarketHours:
     type: object
     properties:
@@ -1306,9 +1301,11 @@ definitions:
         format: date-time
       previous_open_hours:
         type: string
+    title: MarketHours
   Movers:
     type: object
-  Multiple«AccountInfo»:
+    title: Movers
+  MultipleOfAccountInfo:
     type: object
     properties:
       count:
@@ -1322,7 +1319,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AccountInfo'
-  Multiple«FundamentalsData»:
+    title: MultipleOfAccountInfo
+  MultipleOfFundamentalsData:
     type: object
     properties:
       count:
@@ -1336,7 +1334,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/FundamentalsData'
-  Multiple«InstrumentData»:
+    title: MultipleOfFundamentalsData
+  MultipleOfInstrumentData:
     type: object
     properties:
       count:
@@ -1350,7 +1349,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InstrumentData'
-  Multiple«InstrumentSplit»:
+    title: MultipleOfInstrumentData
+  MultipleOfInstrumentSplit:
     type: object
     properties:
       count:
@@ -1364,7 +1364,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/InstrumentSplit'
-  Multiple«MarketData»:
+    title: MultipleOfInstrumentSplit
+  MultipleOfMarketData:
     type: object
     properties:
       count:
@@ -1378,7 +1379,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/MarketData'
-  Multiple«Movers»:
+    title: MultipleOfMarketData
+  MultipleOfMovers:
     type: object
     properties:
       count:
@@ -1392,7 +1394,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Movers'
-  Multiple«OrderResponse»:
+    title: MultipleOfMovers
+  MultipleOfOrderResponse:
     type: object
     properties:
       count:
@@ -1406,7 +1409,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/OrderResponse'
-  Multiple«Position»:
+    title: MultipleOfOrderResponse
+  MultipleOfPosition:
     type: object
     properties:
       count:
@@ -1420,7 +1424,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Position'
-  Multiple«QuoteData»:
+    title: MultipleOfPosition
+  MultipleOfQuoteData:
     type: object
     properties:
       count:
@@ -1434,7 +1439,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/QuoteData'
-  Multiple«WatchListCreateResponse»:
+    title: MultipleOfQuoteData
+  MultipleOfWatchListCreateResponse:
     type: object
     properties:
       count:
@@ -1448,7 +1454,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/WatchListCreateResponse'
-  Multiple«WatchListsData»:
+    title: MultipleOfWatchListCreateResponse
+  MultipleOfWatchListsData:
     type: object
     properties:
       count:
@@ -1462,6 +1469,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/WatchListsData'
+    title: MultipleOfWatchListsData
   OrderResponse:
     type: object
     properties:
@@ -1530,6 +1538,7 @@ definitions:
         format: date-time
       url:
         type: string
+    title: OrderResponse
   Portfolio:
     type: object
     properties:
@@ -1584,6 +1593,7 @@ definitions:
       withdrawable_amount:
         type: number
         format: double
+    title: Portfolio
   Position:
     type: object
     properties:
@@ -1620,6 +1630,7 @@ definitions:
         format: date-time
       url:
         type: string
+    title: Position
   QuoteData:
     type: object
     properties:
@@ -1657,6 +1668,7 @@ definitions:
       updated_at:
         type: string
         format: date-time
+    title: QuoteData
   UserId:
     type: object
     properties:
@@ -1666,6 +1678,7 @@ definitions:
         type: string
       username:
         type: string
+    title: UserId
   UserInfo:
     type: object
     properties:
@@ -1693,6 +1706,7 @@ definitions:
         type: string
       username:
         type: string
+    title: UserInfo
   WatchListCreateResponse:
     type: object
     properties:
@@ -1702,6 +1716,7 @@ definitions:
         type: string
       user:
         type: string
+    title: WatchListCreateResponse
   WatchListsData:
     type: object
     properties:
@@ -1713,3 +1728,4 @@ definitions:
         type: string
       watchlist:
         type: string
+    title: WatchListsData
