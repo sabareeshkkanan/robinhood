@@ -23,12 +23,16 @@
       "description": "Authentication"
     },
     {
-      "name": "quote",
-      "description": "Quote"
-    },
-    {
       "name": "dividends",
       "description": "Dividends"
+    },
+    {
+      "name": "fundamentals",
+      "description": "Fundamentals"
+    },
+    {
+      "name": "instruments",
+      "description": "Instruments"
     },
     {
       "name": "markets",
@@ -39,24 +43,20 @@
       "description": "Movers"
     },
     {
-      "name": "watchlists",
-      "description": "Watchlists"
-    },
-    {
-      "name": "fundamentals",
-      "description": "Fundamentals"
-    },
-    {
       "name": "order",
       "description": "Order"
     },
     {
-      "name": "instruments",
-      "description": "Instruments"
+      "name": "quote",
+      "description": "Quote"
     },
     {
       "name": "user",
       "description": "User"
+    },
+    {
+      "name": "watchlists",
+      "description": "Watchlists"
     }
   ],
   "schemes": [
@@ -70,9 +70,6 @@
         ],
         "summary": "getAll",
         "operationId": "getAllUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -80,7 +77,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«AccountInfo»"
+              "$ref": "#/definitions/MultipleOfAccountInfo"
             }
           },
           "401": {
@@ -92,7 +89,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/accounts/{accountId}/portfolio/": {
@@ -102,9 +100,6 @@
         ],
         "summary": "getPortFolio",
         "operationId": "getPortFolioUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -133,7 +128,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/accounts/{accountId}/positions/": {
@@ -143,9 +139,6 @@
         ],
         "summary": "getAllPositions",
         "operationId": "getAllPositionsUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -169,7 +162,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«Position»"
+              "$ref": "#/definitions/MultipleOfPosition"
             }
           },
           "401": {
@@ -181,7 +174,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/accounts/{accountId}/positions/{positionId}/": {
@@ -191,9 +185,6 @@
         ],
         "summary": "getPosition",
         "operationId": "getPositionUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -229,7 +220,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/api-token-auth/": {
@@ -247,25 +239,31 @@
         ],
         "parameters": [
           {
-            "name": "username",
             "in": "formData",
-            "description": "username",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "formData",
-            "description": "password",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "mfa_code",
-            "in": "formData",
             "description": "mfa_code",
             "required": false,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "description": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "username",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -287,7 +285,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/api-token-logout/": {
@@ -328,7 +327,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/dividends/{id}/": {
@@ -338,9 +338,6 @@
         ],
         "summary": "getDividend",
         "operationId": "getDividendUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -366,7 +363,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/fundamentals/": {
@@ -376,9 +374,6 @@
         ],
         "summary": "query",
         "operationId": "queryUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -395,7 +390,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«FundamentalsData»"
+              "$ref": "#/definitions/MultipleOfFundamentalsData"
             }
           },
           "401": {
@@ -407,7 +402,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/fundamentals/{symbol}/": {
@@ -417,9 +413,6 @@
         ],
         "summary": "getFundamentals",
         "operationId": "getFundamentalsUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -448,7 +441,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/instruments": {
@@ -458,9 +452,6 @@
         ],
         "summary": "getAll",
         "operationId": "getAllUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -468,7 +459,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«InstrumentData»"
+              "$ref": "#/definitions/MultipleOfInstrumentData"
             }
           },
           "401": {
@@ -480,7 +471,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/instruments/": {
@@ -490,9 +482,6 @@
         ],
         "summary": "query",
         "operationId": "queryUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -509,7 +498,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«InstrumentData»"
+              "$ref": "#/definitions/MultipleOfInstrumentData"
             }
           },
           "401": {
@@ -521,7 +510,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/instruments/{instrument_id}/": {
@@ -531,9 +521,6 @@
         ],
         "summary": "get",
         "operationId": "getUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -562,7 +549,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/instruments/{instrument_id}/splits/": {
@@ -572,9 +560,6 @@
         ],
         "summary": "getSplits",
         "operationId": "getSplitsUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -591,7 +576,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«InstrumentSplit»"
+              "$ref": "#/definitions/MultipleOfInstrumentSplit"
             }
           },
           "401": {
@@ -603,7 +588,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/markets": {
@@ -613,9 +599,6 @@
         ],
         "summary": "getAll",
         "operationId": "getAllUsingGET_2",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -623,7 +606,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«MarketData»"
+              "$ref": "#/definitions/MultipleOfMarketData"
             }
           },
           "401": {
@@ -635,7 +618,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/markets/{mic}/hours/{date}/": {
@@ -645,24 +629,21 @@
         ],
         "summary": "getMArketHours",
         "operationId": "getMArketHoursUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
         "parameters": [
           {
-            "name": "mic",
+            "name": "date",
             "in": "path",
-            "description": "mic",
+            "description": "date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "date",
+            "name": "mic",
             "in": "path",
-            "description": "date",
+            "description": "mic",
             "required": true,
             "type": "string"
           }
@@ -683,7 +664,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/midlands/movers/sp500/": {
@@ -693,9 +675,6 @@
         ],
         "summary": "getMovers",
         "operationId": "getMoversUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -712,7 +691,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«Movers»"
+              "$ref": "#/definitions/MultipleOfMovers"
             }
           },
           "401": {
@@ -724,7 +703,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/orders/": {
@@ -734,20 +714,16 @@
         ],
         "summary": "getAll",
         "operationId": "getAllUsingGET_3",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
         "parameters": [
           {
-            "name": "updated_at",
+            "name": "cursonr",
             "in": "query",
-            "description": "updated_at",
+            "description": "cursonr",
             "required": false,
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           {
             "name": "instrument",
@@ -757,18 +733,19 @@
             "type": "string"
           },
           {
-            "name": "cursonr",
+            "name": "updated_at",
             "in": "query",
-            "description": "cursonr",
+            "description": "updated_at",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«OrderResponse»"
+              "$ref": "#/definitions/MultipleOfOrderResponse"
             }
           },
           "401": {
@@ -780,7 +757,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -802,44 +780,37 @@
             "type": "string"
           },
           {
+            "name": "client_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "extended_hours",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "instrument",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "symbol",
+            "name": "override_day_trade_checks",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
-            "name": "type",
+            "name": "override_dtbp_checks",
             "in": "query",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "time_in_force",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "trigger",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "price",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "stop_price",
             "in": "query",
             "required": false,
             "type": "number",
@@ -859,28 +830,35 @@
             "type": "string"
           },
           {
-            "name": "client_id",
+            "name": "stop_price",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "symbol",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "extended_hours",
+            "name": "time_in_force",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "string"
           },
           {
-            "name": "override_day_trade_checks",
+            "name": "trigger",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "string"
           },
           {
-            "name": "override_dtbp_checks",
+            "name": "type",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "string"
           }
         ],
         "responses": {
@@ -902,7 +880,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/orders/{order_id}/": {
@@ -912,9 +891,6 @@
         ],
         "summary": "getOrder",
         "operationId": "getOrderUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -943,7 +919,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/orders/{order_id}/cancel/": {
@@ -987,7 +964,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/quotes/": {
@@ -997,9 +975,6 @@
         ],
         "summary": "getQuotes",
         "operationId": "getQuotesUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1017,7 +992,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«QuoteData»"
+              "$ref": "#/definitions/MultipleOfQuoteData"
             }
           },
           "401": {
@@ -1029,7 +1004,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/quotes/{symbol}/": {
@@ -1039,9 +1015,6 @@
         ],
         "summary": "getQuote",
         "operationId": "getQuoteUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1070,7 +1043,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/user/": {
@@ -1080,9 +1054,6 @@
         ],
         "summary": "getUser",
         "operationId": "getUserUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1102,7 +1073,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/user/basic_info/": {
@@ -1112,9 +1084,6 @@
         ],
         "summary": "getBasicInfo",
         "operationId": "getBasicInfoUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1134,7 +1103,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/user/id/": {
@@ -1144,9 +1114,6 @@
         ],
         "summary": "getUserId",
         "operationId": "getUserIdUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1166,7 +1133,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/user/investment_profile/": {
@@ -1176,9 +1144,6 @@
         ],
         "summary": "getInvestmentProfile",
         "operationId": "getInvestmentProfileUsingGET",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1198,7 +1163,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/watchlists/": {
@@ -1208,9 +1174,6 @@
         ],
         "summary": "getAll",
         "operationId": "getAllUsingGET_4",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1218,7 +1181,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«WatchListCreateResponse»"
+              "$ref": "#/definitions/MultipleOfWatchListCreateResponse"
             }
           },
           "401": {
@@ -1230,7 +1193,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       },
       "post": {
         "tags": [
@@ -1272,7 +1236,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/watchlists/Default/bulk_add/": {
@@ -1319,7 +1284,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/watchlists/{name}/": {
@@ -1329,9 +1295,6 @@
         ],
         "summary": "get",
         "operationId": "getUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
@@ -1348,7 +1311,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«WatchListsData»"
+              "$ref": "#/definitions/MultipleOfWatchListsData"
             }
           },
           "401": {
@@ -1360,7 +1323,8 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "deprecated": false
       }
     },
     "/watchlists/{name}/{instrumentId}": {
@@ -1370,24 +1334,21 @@
         ],
         "summary": "delete",
         "operationId": "deleteUsingDELETE",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "*/*"
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "instrumentId",
             "in": "path",
-            "description": "name",
+            "description": "instrumentId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "instrumentId",
+            "name": "name",
             "in": "path",
-            "description": "instrumentId",
+            "description": "name",
             "required": true,
             "type": "string"
           }
@@ -1396,7 +1357,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Multiple«WatchListsData»"
+              "$ref": "#/definitions/MultipleOfWatchListsData"
             }
           },
           "204": {
@@ -1408,7 +1369,8 @@
           "403": {
             "description": "Forbidden"
           }
-        }
+        },
+        "deprecated": false
       }
     }
   },
@@ -1506,7 +1468,8 @@
         "withdrawal_halted": {
           "type": "boolean"
         }
-      }
+      },
+      "title": "AccountInfo"
     },
     "AuthResponse": {
       "type": "object",
@@ -1520,7 +1483,8 @@
         "token": {
           "type": "string"
         }
-      }
+      },
+      "title": "AuthResponse"
     },
     "BasicInfo": {
       "type": "object",
@@ -1566,7 +1530,8 @@
         "zipcode": {
           "type": "string"
         }
-      }
+      },
+      "title": "BasicInfo"
     },
     "CashBalances": {
       "type": "object",
@@ -1603,7 +1568,8 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "title": "CashBalances"
     },
     "Execution": {
       "type": "object",
@@ -1627,7 +1593,8 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "title": "Execution"
     },
     "FundamentalsData": {
       "type": "object",
@@ -1678,7 +1645,8 @@
           "type": "number",
           "format": "double"
         }
-      }
+      },
+      "title": "FundamentalsData"
     },
     "InstrumentData": {
       "type": "object",
@@ -1747,7 +1715,8 @@
         "url": {
           "type": "string"
         }
-      }
+      },
+      "title": "InstrumentData"
     },
     "InstrumentSplit": {
       "type": "object",
@@ -1767,7 +1736,8 @@
         "url": {
           "type": "string"
         }
-      }
+      },
+      "title": "InstrumentSplit"
     },
     "InvestmentProfile": {
       "type": "object",
@@ -1812,7 +1782,8 @@
         "user": {
           "type": "string"
         }
-      }
+      },
+      "title": "InvestmentProfile"
     },
     "MarginBalances": {
       "type": "object",
@@ -1881,7 +1852,8 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "title": "MarginBalances"
     },
     "MarketData": {
       "type": "object",
@@ -1916,7 +1888,8 @@
         "website": {
           "type": "string"
         }
-      }
+      },
+      "title": "MarketData"
     },
     "MarketHours": {
       "type": "object",
@@ -1950,12 +1923,14 @@
         "previous_open_hours": {
           "type": "string"
         }
-      }
+      },
+      "title": "MarketHours"
     },
     "Movers": {
-      "type": "object"
+      "type": "object",
+      "title": "Movers"
     },
-    "Multiple«AccountInfo»": {
+    "MultipleOfAccountInfo": {
       "type": "object",
       "properties": {
         "count": {
@@ -1974,9 +1949,10 @@
             "$ref": "#/definitions/AccountInfo"
           }
         }
-      }
+      },
+      "title": "MultipleOfAccountInfo"
     },
-    "Multiple«FundamentalsData»": {
+    "MultipleOfFundamentalsData": {
       "type": "object",
       "properties": {
         "count": {
@@ -1995,9 +1971,10 @@
             "$ref": "#/definitions/FundamentalsData"
           }
         }
-      }
+      },
+      "title": "MultipleOfFundamentalsData"
     },
-    "Multiple«InstrumentData»": {
+    "MultipleOfInstrumentData": {
       "type": "object",
       "properties": {
         "count": {
@@ -2016,9 +1993,10 @@
             "$ref": "#/definitions/InstrumentData"
           }
         }
-      }
+      },
+      "title": "MultipleOfInstrumentData"
     },
-    "Multiple«InstrumentSplit»": {
+    "MultipleOfInstrumentSplit": {
       "type": "object",
       "properties": {
         "count": {
@@ -2037,9 +2015,10 @@
             "$ref": "#/definitions/InstrumentSplit"
           }
         }
-      }
+      },
+      "title": "MultipleOfInstrumentSplit"
     },
-    "Multiple«MarketData»": {
+    "MultipleOfMarketData": {
       "type": "object",
       "properties": {
         "count": {
@@ -2058,9 +2037,10 @@
             "$ref": "#/definitions/MarketData"
           }
         }
-      }
+      },
+      "title": "MultipleOfMarketData"
     },
-    "Multiple«Movers»": {
+    "MultipleOfMovers": {
       "type": "object",
       "properties": {
         "count": {
@@ -2079,9 +2059,10 @@
             "$ref": "#/definitions/Movers"
           }
         }
-      }
+      },
+      "title": "MultipleOfMovers"
     },
-    "Multiple«OrderResponse»": {
+    "MultipleOfOrderResponse": {
       "type": "object",
       "properties": {
         "count": {
@@ -2100,9 +2081,10 @@
             "$ref": "#/definitions/OrderResponse"
           }
         }
-      }
+      },
+      "title": "MultipleOfOrderResponse"
     },
-    "Multiple«Position»": {
+    "MultipleOfPosition": {
       "type": "object",
       "properties": {
         "count": {
@@ -2121,9 +2103,10 @@
             "$ref": "#/definitions/Position"
           }
         }
-      }
+      },
+      "title": "MultipleOfPosition"
     },
-    "Multiple«QuoteData»": {
+    "MultipleOfQuoteData": {
       "type": "object",
       "properties": {
         "count": {
@@ -2142,9 +2125,10 @@
             "$ref": "#/definitions/QuoteData"
           }
         }
-      }
+      },
+      "title": "MultipleOfQuoteData"
     },
-    "Multiple«WatchListCreateResponse»": {
+    "MultipleOfWatchListCreateResponse": {
       "type": "object",
       "properties": {
         "count": {
@@ -2163,9 +2147,10 @@
             "$ref": "#/definitions/WatchListCreateResponse"
           }
         }
-      }
+      },
+      "title": "MultipleOfWatchListCreateResponse"
     },
-    "Multiple«WatchListsData»": {
+    "MultipleOfWatchListsData": {
       "type": "object",
       "properties": {
         "count": {
@@ -2184,7 +2169,8 @@
             "$ref": "#/definitions/WatchListsData"
           }
         }
-      }
+      },
+      "title": "MultipleOfWatchListsData"
     },
     "OrderResponse": {
       "type": "object",
@@ -2282,7 +2268,8 @@
         "url": {
           "type": "string"
         }
-      }
+      },
+      "title": "OrderResponse"
     },
     "Portfolio": {
       "type": "object",
@@ -2356,7 +2343,8 @@
           "type": "number",
           "format": "double"
         }
-      }
+      },
+      "title": "Portfolio"
     },
     "Position": {
       "type": "object",
@@ -2406,7 +2394,8 @@
         "url": {
           "type": "string"
         }
-      }
+      },
+      "title": "Position"
     },
     "QuoteData": {
       "type": "object",
@@ -2457,7 +2446,8 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "title": "QuoteData"
     },
     "UserId": {
       "type": "object",
@@ -2471,7 +2461,8 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "title": "UserId"
     },
     "UserInfo": {
       "type": "object",
@@ -2512,7 +2503,8 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "title": "UserInfo"
     },
     "WatchListCreateResponse": {
       "type": "object",
@@ -2526,7 +2518,8 @@
         "user": {
           "type": "string"
         }
-      }
+      },
+      "title": "WatchListCreateResponse"
     },
     "WatchListsData": {
       "type": "object",
@@ -2543,7 +2536,8 @@
         "watchlist": {
           "type": "string"
         }
-      }
+      },
+      "title": "WatchListsData"
     }
   }
 }

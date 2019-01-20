@@ -33,6 +33,7 @@ public class SwaggerConfig {
 
         docket.directModelSubstitute(ZonedDateTime.class, Date.class);
         docket.host("api.robinhood.com");
+        docket.forCodeGeneration(true);
         docket.protocols(Stream.of("https").collect(Collectors.toSet()));
 
 
